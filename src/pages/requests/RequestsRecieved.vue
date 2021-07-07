@@ -1,5 +1,5 @@
 <template>
     <section>
-        COACH REGISTRATION
+        REQUEST RECIEVED
     </section>
 </template>
