@@ -25,5 +25,30 @@ export default {
             ...coachData,
             id: userId
         });
+    },
+    async loadCoaches(context) {
+        const response = await fetch(
+            'https://axaxa-9ce0c-default-rtdb.firebaseio.com/coaches.json'
+        );
+        const responseData = await response.json();
+
+        if (!response.ok) {
+            // error handling
+        }
+
+        const coaches = [];
+
+        for (const key in responseData) {
+            const coach = {
+                id: key,
+                firstName: responseData[key].firstName,
+                lastName: responseData[key].lastName,
+                areas: responseData[key].description,
+                description: responseData[key].hourlyRate,
+                hourlyRate: responseData[key].areas
+            };
+            coaches.push(coach);
+        }
+        context.commit('setCoaches', coaches)
     }
 };
