@@ -1,4 +1,5 @@
 <template>
+  <base-dialog :show="!!error" @close="closeDialog" title="An error occured!"> {{error}}</base-dialog>
   <base-card>
     <coaches-filter @change-filter="setFilters"></coaches-filter>
   </base-card>
@@ -40,6 +41,7 @@ export default {
         career: true,
       },
       isLoading: false,
+      error: null,
     };
   },
   components: { CoachItem, CoachesFilter },
@@ -70,9 +72,16 @@ export default {
     this.loadCoaches();
   },
   methods: {
+    closeDialog() {
+      this.error = null;
+    },
     async loadCoaches() {
       this.isLoading = true;
-      await this.$store.dispatch('coaches/loadCoaches');
+      try {
+        await this.$store.dispatch('coaches/loadCoaches');
+      } catch (error) {
+        this.error = error.message || 'Something went wrong';
+      }
       this.isLoading = false;
     },
     setFilters(updatedFilters) {
