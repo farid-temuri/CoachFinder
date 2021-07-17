@@ -43,12 +43,12 @@ export default {
                 id: key,
                 firstName: responseData[key].firstName,
                 lastName: responseData[key].lastName,
-                areas: responseData[key].description,
-                description: responseData[key].hourlyRate,
-                hourlyRate: responseData[key].areas
+                areas: responseData[key].areas,
+                description: responseData[key].description,
+                hourlyRate: responseData[key].hourlyRate
             };
             coaches.push(coach);
         }
-        context.commit('setCoaches', coaches)
+        context.commit('setCoaches', coaches);
     }
 };

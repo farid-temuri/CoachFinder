@@ -23,9 +23,9 @@ export default {
                     hourlyRate: 30
                 }
             ]
-        }
+        };
     },
     mutations,
     actions,
     getters
-}
+};
