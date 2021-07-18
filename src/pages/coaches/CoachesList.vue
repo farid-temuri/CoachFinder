@@ -1,32 +1,38 @@
 <template>
-  <base-dialog :show="!!error" @close="closeDialog" title="An error occured!"> {{error}}</base-dialog>
-  <base-card>
-    <coaches-filter @change-filter="setFilters"></coaches-filter>
-  </base-card>
-  <base-card>
-    <div class="controls">
-      <base-button mode="outline" @click="loadCoaches(true)"> Refresh</base-button>
-      <base-button link to="/register" v-if="!isCoach">
-        Register as coach</base-button
-      >
-    </div>
-    <div v-if="isLoading">
-      <base-spinner></base-spinner>
-    </div>
-    <ul v-else-if="hasCoaches">
-      <coach-item
-        v-for="coach in filteredCoaches"
-        :key="coach.id"
-        :id="coach.id"
-        :firstName="coach.firstName"
-        :lastName="coach.lastName"
-        :rates="coach.hourlyRate"
-        :areas="coach.areas"
-      >
-      </coach-item>
-    </ul>
-    <h3 v-else>No coaches Found!</h3>
-  </base-card>
+  <div>
+    <base-dialog :show="!!error" @close="closeDialog" title="An error occured!">
+      {{ error }}</base-dialog
+    >
+    <base-card>
+      <coaches-filter @change-filter="setFilters"></coaches-filter>
+    </base-card>
+    <base-card>
+      <div class="controls">
+        <base-button mode="outline" @click="loadCoaches(true)">
+          Refresh</base-button
+        >
+        <base-button link to="/register" v-if="!isCoach">
+          Register as coach</base-button
+        >
+      </div>
+      <div v-if="isLoading">
+        <base-spinner></base-spinner>
+      </div>
+      <ul v-else-if="hasCoaches">
+        <coach-item
+          v-for="coach in filteredCoaches"
+          :key="coach.id"
+          :id="coach.id"
+          :firstName="coach.firstName"
+          :lastName="coach.lastName"
+          :rates="coach.hourlyRate"
+          :areas="coach.areas"
+        >
+        </coach-item>
+      </ul>
+      <h3 v-else>No coaches Found!</h3>
+    </base-card>
+  </div>
 </template>
 
 <script>
@@ -78,7 +84,9 @@ export default {
     async loadCoaches(refresh = false) {
       this.isLoading = true;
       try {
-        await this.$store.dispatch('coaches/loadCoaches', {forceUpdate: refresh});
+        await this.$store.dispatch('coaches/loadCoaches', {
+          forceUpdate: refresh,
+        });
       } catch (error) {
         this.error = error.message || 'Something went wrong';
       }
