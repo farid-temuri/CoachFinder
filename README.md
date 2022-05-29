@@ -1,4 +1,4 @@
-# Welcome, fellow. 
+# Welcome 
 Let me introduce to my project it has:
 1. Vue 3
 2. VueX for global state management
