@@ -14,7 +14,7 @@ export default {
             type: Boolean,
             required: false,
             deafult: false,
-        },
+    },
         mode: {
             type: String,
             required: false,
